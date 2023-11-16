@@ -1,0 +1,37 @@
+//Problem 2 Algorithm (Determining Orthogonal Vectors Using Dot Product and Arrays):
+
+ALGORITHM isOrthogonal
+VARIABLES
+    vectors: ARRAY OF ARRAY OF INTEGER
+    orthogonal_status: ARRAY OF BOOLEAN
+
+FUNCTION dotProduct(vector1: ARRAY OF INTEGER, vector2: ARRAY OF INTEGER) RETURNS INTEGER
+VARIABLES
+    dot_product: INTEGER
+BEGIN
+    dot_product ← 0
+    
+    FOR i FROM 1 TO LENGTH(vector1) DO
+        dot_product ← dot_product + (vector1[i] * vector2[i])
+    END FOR
+    
+    RETURN dot_product
+END FUNCTION
+
+BEGIN
+    orthogonal_status ← []
+    
+    FOR i FROM 1 TO LENGTH(vectors) STEP 2 DO
+        vector1 ← vectors[i]
+        vector2 ← vectors[i + 1]
+        dot_product ← dotProduct(vector1, vector2)
+        
+        IF dot_product = 0 THEN
+            APPEND TRUE TO orthogonal_status  // Vectors are orthogonal
+        ELSE
+            APPEND FALSE TO orthogonal_status  // Vectors are not orthogonal
+        END IF
+    END FOR
+    
+    RETURN orthogonal_status
+END
